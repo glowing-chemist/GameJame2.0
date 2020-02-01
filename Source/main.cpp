@@ -5,6 +5,7 @@
 #include "Engine/StaticMesh.h"
 #include "Player.hpp"
 #include "PhysicsManager.hpp"
+#include "MeshObject.hpp"
 
 int main()
 {
@@ -35,8 +36,11 @@ int main()
 	std::array<std::string, 6> skybox{ "./Assets/Skybox.png", "./Assets/Skybox.png", "./Assets/Skybox.png", "./Assets/Skybox.png", "./Assets/Skybox.png", "./Assets/Skybox.png" };
 	testScene.loadSkybox(skybox, &eng);
 	testScene.setShadowingLight(float3(10.0f, -10.0f, 10.0f), float3(0.0f, 0.0f, 1.0f));
+
 	const SceneID meshID = testScene.addMesh(*firstMesh, MeshType::Dynamic);
-	const InstanceID instanceID = testScene.addMeshInstance(meshID, glm::mat4(1.0f));
+
+	MeshObject* object1 = new MeshObject(meshID, &testScene, physicsManager);
+
 	testScene.loadMaterials(&eng);
 	testScene.finalise(&eng);
 
@@ -63,6 +67,8 @@ int main()
 		thePlayer->DoInput();
 
 		physicsManager->PerformPhysics();
+
+		testScene.finalise(&eng);
 
 		eng.recordScene();
 		eng.render();

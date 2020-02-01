@@ -21,5 +21,5 @@ include_directories("${BELL_PATH}/Include"
 
 file(COPY "${CMAKE_CURRENT_LIST_DIR}/Assets" DESTINATION "${CMAKE_BINARY_DIR}/")
 
-add_executable(WALL Source/main.cpp Source/WorldGeneration.cpp Source/Player.cpp Source/PhysicsManager.cpp Source/PhysicalObject.cpp)
+add_executable(WALL Source/main.cpp Source/WorldGeneration.cpp Source/Player.cpp Source/PhysicsManager.cpp Source/PhysicalObject.cpp Source/MeshObject.cpp)
 target_link_libraries(WALL BELL)

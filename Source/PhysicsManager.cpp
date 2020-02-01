@@ -14,5 +14,6 @@ void PhysicsManager::PerformPhysics()
 	{
 		object->AddVelocity({ 0.0f, -0.001f, 0.0f });
 		object->PerformPhysics();
+		object->Finalise();
 	}
 }

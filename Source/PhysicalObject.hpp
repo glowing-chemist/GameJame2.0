@@ -1,3 +1,5 @@
+#ifndef PHYSICALOBJECT_HDR
+#define PHYSICALOBJECT_HDR
 #include "Engine/Engine.hpp"
 
 class PhysicalObject
@@ -11,8 +13,11 @@ public:
 	void AddVelocity(const float3 velocity);
 
 	void PerformPhysics();
+	virtual void Finalise() {}
 
 protected:
 	float3 mPosition;
 	float3 mVelocity;
 };
+
+#endif
