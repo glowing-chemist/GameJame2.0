@@ -19,6 +19,7 @@ include_directories("${BELL_PATH}/Include"
 			"${BELL_PATH}/ThirdParty/stb_image"
 			"${BELL_PATH}/ThirdParty/glad/include")
 
+file(COPY "${CMAKE_CURRENT_LIST_DIR}/Assets" DESTINATION "${CMAKE_BINARY_DIR}/")
 
 add_executable(WALL Source/main.cpp Source/WorldGeneration.cpp)
 target_link_libraries(WALL BELL)
