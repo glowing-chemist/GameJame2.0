@@ -3,6 +3,8 @@
 #include "GLFW/glfw3.h"
 
 #include "Engine/StaticMesh.h"
+#include "Player.hpp"
+#include "PhysicsManager.hpp"
 
 int main()
 {
@@ -26,6 +28,8 @@ int main()
 		0
 	);
 
+	PhysicsManager* physicsManager = new PhysicsManager();
+
 	Scene testScene("Assets\\Materials");
 
 	std::array<std::string, 6> skybox{ "./Assets/Skybox.png", "./Assets/Skybox.png", "./Assets/Skybox.png", "./Assets/Skybox.png", "./Assets/Skybox.png", "./Assets/Skybox.png" };
@@ -45,6 +49,8 @@ int main()
 	eng.registerPass(PassType::ConvolveSkybox);
 	eng.registerPass(PassType::Composite);
 
+	Player* thePlayer = new Player(window, eng.getCurrentSceneCamera(), physicsManager);
+
 	while (!glfwWindowShouldClose(window))
 	{
 		glfwPollEvents();
@@ -54,28 +60,16 @@ int main()
 
 		firstFrame = false;
 
-		Camera& camera = eng.getCurrentSceneCamera();
+		thePlayer->DoInput();
 
-		if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-			camera.moveForward(0.2f);
-		if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-			camera.moveBackward(0.2f);
-		if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-			camera.moveLeft(0.2f);
-		if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-			camera.moveRight(0.2f);
-		if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS)
-			camera.rotateYaw(1.0f);
-		if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
-			camera.rotateYaw(-1.0f);
-		if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
-			camera.moveUp((0.2f));
-		if (glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS)
-			camera.moveDown(0.2f);
+		physicsManager->PerformPhysics();
 
 		eng.recordScene();
 		eng.render();
 		eng.swap();
 		eng.endFrame();
 	}
+
+	delete firstMesh;
+	delete thePlayer;
 }
