@@ -31,8 +31,8 @@ int main()
 	std::array<std::string, 6> skybox{ "./Assets/Skybox.png", "./Assets/Skybox.png", "./Assets/Skybox.png", "./Assets/Skybox.png", "./Assets/Skybox.png", "./Assets/Skybox.png" };
 	testScene.loadSkybox(skybox, &eng);
 	testScene.setShadowingLight(float3(10.0f, -10.0f, 10.0f), float3(0.0f, 0.0f, 1.0f));
-	const auto meshID = testScene.addMesh(*firstMesh, MeshType::Dynamic);
-	testScene.addMeshInstance(meshID, glm::mat4(1.0f));
+	const SceneID meshID = testScene.addMesh(*firstMesh, MeshType::Dynamic);
+	const InstanceID instanceID = testScene.addMeshInstance(meshID, glm::mat4(1.0f));
 	testScene.loadMaterials(&eng);
 	testScene.finalise(&eng);
 
