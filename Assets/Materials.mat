@@ -1,0 +1,7 @@
+1
+Cube 0 ;
+Material 0
+Albedo textures/redbricks2b-albedo.png
+Normal textures/redbricks2b-normal.png
+Roughness textures/redbricks2b-rough.png
+Metalness textures/redbricks2b-metalness.png
