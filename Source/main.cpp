@@ -39,12 +39,12 @@ int main()
 
 	const SceneID meshID = testScene.addMesh(*firstMesh, MeshType::Dynamic);
 
-	MeshObject* object1 = new MeshObject(meshID, &testScene, physicsManager);
-
 	testScene.loadMaterials(&eng);
 	testScene.finalise(&eng);
 
 	eng.setScene(testScene);
+
+	MeshObject* object1 = new MeshObject(meshID, &eng.getScene(), physicsManager);
 
 	eng.registerPass(PassType::GBuffer);
 	eng.registerPass(PassType::DeferredPBRIBL);
