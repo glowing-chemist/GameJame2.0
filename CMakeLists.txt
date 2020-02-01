@@ -20,5 +20,5 @@ include_directories("${BELL_PATH}/Include"
 			"${BELL_PATH}/ThirdParty/glad/include")
 
 
-add_executable(WALL main.cpp)
+add_executable(WALL Source/main.cpp Source/WorldGeneration.cpp)
 target_link_libraries(WALL BELL)
