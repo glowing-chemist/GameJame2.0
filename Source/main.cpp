@@ -40,11 +40,15 @@ int main()
 	const SceneID meshID = testScene.addMesh(*firstMesh, MeshType::Dynamic);
 
 	testScene.loadMaterials(&eng);
-	testScene.finalise(&eng);
+	testScene.uploadData(&eng);
 
 	eng.setScene(testScene);
 
-	MeshObject* object1 = new MeshObject(meshID, &eng.getScene(), physicsManager);
+	MeshObject* object1 = new MeshObject({ 0.0f, 10.0f, 0.0f }, meshID, &eng.getScene(), physicsManager);
+	MeshObject* object2 = new MeshObject({ 2.0f, 10.0f, 0.0f }, meshID, &eng.getScene(), physicsManager);
+	MeshObject* object3 = new MeshObject({ -2.0f, 10.0f, 0.0f }, meshID, &eng.getScene(), physicsManager);
+
+	eng.getScene().computeBounds(MeshType::Dynamic);
 
 	eng.registerPass(PassType::GBuffer);
 	eng.registerPass(PassType::DeferredPBRIBL);
@@ -68,7 +72,7 @@ int main()
 
 		physicsManager->PerformPhysics();
 
-		testScene.finalise(&eng);
+		eng.getScene().computeBounds(MeshType::Dynamic);
 
 		eng.recordScene();
 		eng.render();
