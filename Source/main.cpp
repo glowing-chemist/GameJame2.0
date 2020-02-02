@@ -7,6 +7,8 @@
 #include "PhysicsManager.hpp"
 #include "MeshObject.hpp"
 
+#include <glm/gtx/transform.hpp>
+
 int main()
 {
 	glfwInit();
@@ -29,15 +31,26 @@ int main()
 		0
 	);
 
+	StaticMesh* floor = new StaticMesh(
+		"Assets\\Meshes\\plane.fbx",
+		VertexAttributes::Position4 |
+		VertexAttributes::TextureCoordinates |
+		VertexAttributes::Normals,
+		1
+	);
+
 	PhysicsManager* physicsManager = new PhysicsManager();
 
 	Scene testScene("Assets\\Materials");
 
-	std::array<std::string, 6> skybox{ "./Assets/Skybox.png", "./Assets/Skybox.png", "./Assets/Skybox.png", "./Assets/Skybox.png", "./Assets/Skybox.png", "./Assets/Skybox.png" };
+	std::array<std::string, 6> skybox{ "./Assets/textures/bluecloud_ft.jpg", "./Assets/textures/bluecloud_bk.jpg", "./Assets/textures/bluecloud_up.jpg", "./Assets/textures/bluecloud_dn.jpg", "./Assets/textures/bluecloud_rt.jpg","./Assets/textures/bluecloud_lf.jpg" };
 	testScene.loadSkybox(skybox, &eng);
 	testScene.setShadowingLight(float3(10.0f, -10.0f, 10.0f), float3(0.0f, 0.0f, 1.0f));
 
 	const SceneID meshID = testScene.addMesh(*firstMesh, MeshType::Dynamic);
+	const SceneID planeID = testScene.addMesh(*floor, MeshType::Static);
+
+	const InstanceID groundInstance = testScene.addMeshInstance(planeID, glm::scale(float3(100.0f, 100.0f, 100.0f)) *  glm::rotate(glm::radians(-90.0f), float3(1.0f, 0.0f, 0.0f)));
 
 	testScene.loadMaterials(&eng);
 	testScene.uploadData(&eng);
@@ -49,6 +62,7 @@ int main()
 	MeshObject* object3 = new MeshObject({ -2.0f, 10.0f, 0.0f }, meshID, &eng.getScene(), physicsManager);
 
 	eng.getScene().computeBounds(MeshType::Dynamic);
+	eng.getScene().computeBounds(MeshType::Static);
 
 	eng.registerPass(PassType::GBuffer);
 	eng.registerPass(PassType::DeferredPBRIBL);

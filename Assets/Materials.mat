@@ -1,7 +1,13 @@
-1
+2
 Cube 0 ;
+Plane 1 ;
 Material 0
 Albedo textures\\Bricks34_col.jpg
 Normal textures\\Bricks34_nrm.jpg
 Roughness textures\\Bricks34_rgh.jpg
+Metalness textures\\Bricks34_mtl.png
+Material 1
+Albedo textures\\Ground37_col.jpg
+Normal textures\\Ground37_nrm.jpg
+Roughness textures\\Ground37_rgh.jpg
 Metalness textures\\Bricks34_mtl.png
