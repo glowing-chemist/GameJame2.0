@@ -12,7 +12,13 @@ public:
 	virtual const AABB& GetAABB() = 0;
 
 	void Move(const float3 offset);
+
+	float3 GetVelocity() { return mVelocity; }
 	void AddVelocity(const float3 velocity);
+	void SetVelocity(unsigned int index, float val);
+	void SetVelocity(const float3 velocity);
+
+	virtual InstanceID GetInstanceID() { return 0; }
 
 	void PerformPhysics();
 	virtual void Finalise() {}

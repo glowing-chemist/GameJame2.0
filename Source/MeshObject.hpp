@@ -6,6 +6,8 @@ public:
 	MeshObject(float3 initPos, SceneID id, class Scene* theScene, class PhysicsManager* manager);
 	virtual void Finalise() override;
 
+	virtual InstanceID GetInstanceID() { return mInstanceID; }
+
 	virtual const AABB& GetAABB() override;
 
 private:
@@ -13,5 +15,5 @@ private:
 	InstanceID mInstanceID;
 	class Scene* mScene;
 
-	AABB mBoundingBox;
+	AABB mBaseBoundingBox;
 };

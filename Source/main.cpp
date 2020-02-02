@@ -39,8 +39,6 @@ int main()
 		1
 	);
 
-	PhysicsManager* physicsManager = new PhysicsManager();
-
 	Scene testScene("Assets\\Materials");
 
 	std::array<std::string, 6> skybox{ "./Assets/textures/bluecloud_ft.jpg", "./Assets/textures/bluecloud_bk.jpg", "./Assets/textures/bluecloud_up.jpg", "./Assets/textures/bluecloud_dn.jpg", "./Assets/textures/bluecloud_rt.jpg","./Assets/textures/bluecloud_lf.jpg" };
@@ -56,10 +54,15 @@ int main()
 	testScene.uploadData(&eng);
 
 	eng.setScene(testScene);
+	PhysicsManager* physicsManager = new PhysicsManager(&eng.getScene());
 
 	MeshObject* object1 = new MeshObject({ 0.0f, 10.0f, 0.0f }, meshID, &eng.getScene(), physicsManager);
-	MeshObject* object2 = new MeshObject({ 2.0f, 10.0f, 0.0f }, meshID, &eng.getScene(), physicsManager);
-	MeshObject* object3 = new MeshObject({ -2.0f, 10.0f, 0.0f }, meshID, &eng.getScene(), physicsManager);
+	MeshObject* object2 = new MeshObject({ 2.5f, 10.0f, 0.0f }, meshID, &eng.getScene(), physicsManager);
+	MeshObject* object3 = new MeshObject({ -2.5f, 10.0f, 0.0f }, meshID, &eng.getScene(), physicsManager);
+
+	MeshObject* object4 = new MeshObject({ 0.0f, 14.0f, 0.0f }, meshID, &eng.getScene(), physicsManager);
+	MeshObject* object5 = new MeshObject({ 2.5f, 14.0f, 0.0f }, meshID, &eng.getScene(), physicsManager);
+	MeshObject* object6 = new MeshObject({ -2.5f, 14.0f, 0.0f }, meshID, &eng.getScene(), physicsManager);
 
 	eng.getScene().computeBounds(MeshType::Dynamic);
 	eng.getScene().computeBounds(MeshType::Static);

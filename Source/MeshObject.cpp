@@ -11,17 +11,21 @@ MeshObject::MeshObject(float3 initPos, SceneID id, Scene* theScene, PhysicsManag
 	: PhysicalObject(manager)
 	, mSceneID(id)
 	, mScene(theScene)
-	, mBoundingBox()
 {
 	mInstanceID = theScene->addMeshInstance(id, glm::mat4(1.0f));
 	mPosition = initPos;
+
+	Scene::MeshInstance* mesh = mScene->getMeshInstance(mInstanceID);
+
+	mBaseBoundingBox = mesh->mMesh->getAABB();
 
 	Finalise();
 }
 
 const AABB& MeshObject::GetAABB()
 {
-	return mBoundingBox;
+	glm::mat4 translateMatrix = glm::translate(mPosition);
+	return mBaseBoundingBox * translateMatrix;
 }
 
 void MeshObject::Finalise()
@@ -36,6 +40,4 @@ void MeshObject::Finalise()
 	vector.x = mPosition.x;
 	vector.y = mPosition.y;
 	vector.z = mPosition.z;
-
-	mBoundingBox = mesh->mMesh->getAABB() * mesh->mTransformation;
 }
