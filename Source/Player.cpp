@@ -19,10 +19,12 @@ void Player::DoInput()
 {
 	float3 movement{ 0.0f, 0.0f, 0.0f };
 
+	const float3& direction = mCamera.getDirection();
+
 	if (glfwGetKey(mWindow, GLFW_KEY_W) == GLFW_PRESS)
-		movement.z += 0.2f;
+		movement += 0.2f * direction;
 	if (glfwGetKey(mWindow, GLFW_KEY_S) == GLFW_PRESS)
-		movement.z -= 0.2f;
+		movement -= 0.2f * direction;
 	if (glfwGetKey(mWindow, GLFW_KEY_A) == GLFW_PRESS)
 		movement.x -= 0.2f;
 	if (glfwGetKey(mWindow, GLFW_KEY_D) == GLFW_PRESS)
