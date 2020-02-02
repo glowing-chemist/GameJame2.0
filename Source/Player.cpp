@@ -9,7 +9,7 @@ Player::Player(class GLFWwindow* window, Camera& camera, PhysicsManager* manager
 	mPosition = { 0.0f, 10.0f, -10.0f };
 }
 
-const AABB Player::GetAABB()
+AABB Player::GetAABB()
 {
 	AABB result{ mBaseBoundingBox };
 	return result + mPosition;

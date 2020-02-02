@@ -9,7 +9,7 @@ public:
 	~PhysicalObject() = default;
 
 	float3 GetPosition() { return mPosition; }
-	virtual const AABB GetAABB() = 0;
+	virtual AABB GetAABB() = 0;
 
 	void Move(const float3 offset);
 

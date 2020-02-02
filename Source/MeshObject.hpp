@@ -8,7 +8,7 @@ public:
 
 	virtual InstanceID GetInstanceID() { return mInstanceID; }
 
-	virtual const AABB GetAABB() override;
+	virtual AABB GetAABB() override;
 
 private:
 	SceneID mSceneID;

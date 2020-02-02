@@ -22,10 +22,10 @@ MeshObject::MeshObject(float3 initPos, SceneID id, Scene* theScene, PhysicsManag
 	Finalise();
 }
 
-const AABB MeshObject::GetAABB()
+AABB MeshObject::GetAABB()
 {
 	glm::mat4 translateMatrix = glm::translate(mPosition);
-	return mBaseBoundingBox * translateMatrix;
+	return AABB(mBaseBoundingBox * translateMatrix);
 }
 
 void MeshObject::Finalise()
