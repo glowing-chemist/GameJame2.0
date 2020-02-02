@@ -10,7 +10,7 @@ public:
 	~Player() = default;
 
 	float3 GetPosition() { return mPosition; }
-	const AABB& GetAABB() override final;
+	const AABB GetAABB() override final;
 
 	void DoInput();
 
