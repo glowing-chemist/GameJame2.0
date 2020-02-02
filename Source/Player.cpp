@@ -4,7 +4,7 @@ Player::Player(class GLFWwindow* window, Camera& camera, PhysicsManager* manager
 	: PhysicalObject(manager)
 	, mWindow(window)
 	, mCamera(camera)
-	, mBaseBoundingBox({1.0f, 2.0f, 1.0f}, {-1.0f, -2.0f, -1.0f})
+	, mBaseBoundingBox({-1.0f, -2.0f, -1.0f}, { 1.0f, 2.0f, 1.0f })
 {
 	mPosition = { 0.0f, 10.0f, -10.0f };
 }
