@@ -32,12 +32,12 @@ void MeshObject::Finalise()
 {
 	Scene::MeshInstance* mesh = mScene->getMeshInstance(mInstanceID);
 
-	//glm::gtx::transform::translate(mesh->mTransformation, mPosition.x, mPosition.y, mPosition.z);
-	//glm::mat4 translateMatrix = glm::translate(mPosition);
-
-	auto& vector = mesh->mTransformation[3];
+    auto matrix = mesh->getTransMatrix();
+    auto& vector = matrix[3];
 
 	vector.x = mPosition.x;
 	vector.y = mPosition.y;
 	vector.z = mPosition.z;
+
+    mesh->setTransMatrix(matrix);
 }
